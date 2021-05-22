@@ -1,17 +1,29 @@
 /* Add your custom extension styling here */
-
-.password-entry {
-    width: 200px;
-    height: 14px;
-    padding: 0;
-    spacing: 0;
-   
-}
-.password-entry .copy-button {
-    icon-size: 16px;
-    color:black;     
-}
- 
-.copy-button {
+.custom-menu-item {
+    spacing: 0px;
     
+}
+.password-entry {
+    width: 150px;
+    height: 16px;
+    color: black;
+}
+.copy-button.button {   
+    padding: 1px;
+    width: 50px;
+}
+
+.menu-item-button.button {
+    width: 75px;
+}
+
+.save-dialog.modal-dialog-content-box {
+    spacing: 0;
+    padding: 0;
+    margin: 0;
 } 
+
+.save-dialog-button.button {
+    width: 75px;
+}
+

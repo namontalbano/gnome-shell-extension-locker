@@ -118,16 +118,17 @@ var InputMenuItem = GObject.registerClass(
 		_init() {
 			super._init({
 				reactive: false,
-				can_focus: false
+				can_focus: false,
+				style_class: 'custom-menu-item'
 			});
 
 			this.passwordEntry = new St.PasswordEntry({
-				style_class: 'password-entry',
+				style_class: 'search-entry password-entry',
 				can_focus: true
 			});
 
 			this.copyButton = new St.Button({
-				style_class: 'button copy-button',
+				style_class: 'copy-button button',
 				label: _('Copy'),
 				can_focus: true,
 				x_expand: true,
@@ -136,7 +137,7 @@ var InputMenuItem = GObject.registerClass(
 
 			this.copyIcon = new St.Icon({
 				icon_name: 'edit-copy-symbolic',
-				style_class: 'copy-button'
+				style_class: 'copy-button button'
 			});
 
 			//this.passwordEntry.set_secondary_icon(this.copyIcon);
@@ -160,10 +161,11 @@ var ButtonsMenuItem = GObject.registerClass(
 			super._init({
 				reactive: false,
 				can_focus: false,
+				style_class: 'custom-menu-item'
 			});
 
 			this.generateButton = new St.Button({
-				style_class: 'message-list-clear-button button',
+				style_class: 'menu-item-button button',
 				label: _('Generate'),
 				can_focus: true,
 				x_expand: true,
@@ -171,11 +173,11 @@ var ButtonsMenuItem = GObject.registerClass(
 			});
 			
 			this.saveButton = new St.Button({
-				style_class: 'message-list-clear-button button',
+				style_class: 'menu-item-button button',
 				label: _('Save'),
 				can_focus: true,
 				x_expand: true,
-				x_align: Clutter.ActorAlign.END,
+				x_align: Clutter.ActorAlign.START,
 			});
 
 			this.add_child(this.generateButton);
