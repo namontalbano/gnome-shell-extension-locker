@@ -1,1 +1,2 @@
-# gnome-shell-extension-locker
+# Locker
+## gnome-shell-extension
