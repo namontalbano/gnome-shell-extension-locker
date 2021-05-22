@@ -13,7 +13,6 @@ var Locker = class Locker {
 		this._inputMenu = new InputMenuItem();
 		this._switchMenu = new SwitchMenuItem();
 		this._buttonsMenu = new ButtonsMenuItem();
-		this._passwordDialog = new Password.SaveDialog();
 		this._build();
 		this._controller()
 	}
@@ -59,8 +58,9 @@ var Locker = class Locker {
 		this._buttonsMenu.saveButton.connect(
 			'button-press-event', () => {
 				// TODO: Implement better handeling
-				this._passwordDialog.password = this._inputMenu.passwordEntry.get_text();
-				this._passwordDialog.open();
+				let passwordDialog = new Password.SaveDialog();
+				passwordDialog.password = this._inputMenu.passwordEntry.get_text();
+				passwordDialog.open();
 		});
 	}
 

@@ -1,6 +1,7 @@
 const ModalDialog = imports.ui.modalDialog;
 const Dialog = imports.ui.dialog;
 const {Gio, GObject, St, Clutter} = imports.gi;
+const Secret = imports.gi.Secret;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -12,8 +13,9 @@ var SaveDialog = GObject.registerClass(
 		_init() {
 			super._init({
                 styleClass: 'run-dialog',
-                destroyOnClose: false,
+                destroyOnClose: true,
             });
+            this._keystore = new Keyring.Keystore();
             this.password = null;
             let title = _('Save to Keyring');
             let content = new Dialog.MessageDialogContent({ title });
@@ -70,13 +72,13 @@ var SaveDialog = GObject.registerClass(
 	    	});
 
             saveButton.connect('button-press-event', () => {
-                let keystore = new Keyring.Keystore(serviceEntry.get_text(), 
-                                                    usernameEntry.get_text(), 
-                                                    this.password);
-                keystore.storePassword();
-                serviceEntry.set_text("");
-                usernameEntry.set_text("");
-				this.close();
+                this._keystore.storePassword(serviceEntry.get_text(), usernameEntry.get_text(), this.password)
+                    .then( () => {
+                        this.close();
+                    });
+                    serviceEntry.set_text("");
+                    usernameEntry.set_text("");     
+                    this.password = null;
 	    	});
         }
-    });
+});

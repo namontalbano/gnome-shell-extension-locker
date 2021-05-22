@@ -1,4 +1,5 @@
 const Secret = imports.gi.Secret;
+const GObject = imports.gi.GObject;
 
 const LOCKER_SCHEMA = new Secret.Schema("org.Test.Locker",
     Secret.SchemaFlags.NONE,
@@ -10,33 +11,24 @@ const LOCKER_SCHEMA = new Secret.Schema("org.Test.Locker",
     
 );
 
-var Keystore = class Keystore {
-    constructor(service, username, password) {
-        log(username);
-        this._username = username;
-        this._service = service;
-        this._password = password;
-        this._attributes = {
-            "application": "Locker Extension",
-            "service": this._service,
-            "username": this._username,
+var Keystore = GObject.registerClass({
+    Signals: {
+        'on-password-stored': {},
+    },
+}, class Keystore extends GObject.Object {
+        async storePassword(service, username, password) {
+            this._attributes = {
+                "application": "Locker Extension",
+                "service": service,
+                "username": username,
+            }
+
+            let label = username + "::" + service;
+            await Secret.password_store(LOCKER_SCHEMA, this._attributes, Secret.COLLECTION_DEFAULT, 
+                                        label, password, null, this._onPasswordStored);
+        }  
+
+        _onPasswordStored(source, result) {
+            Secret.password_store_finish(result);
         }
-    }
-    
-    storePassword() {
-        let label = this._username + "::" + this._service;
-        Secret.password_store(LOCKER_SCHEMA, this._attributes, Secret.COLLECTION_DEFAULT, 
-                            label, this._password, null, this.onPasswordStored);
-    }
-    
-    onPasswordStored(source, result) {
-        Secret.password_store_finish(result);
-        log('Password stored');
-        this._password = null;
-        this._username = null;
-    }
-}
-
-
-
-
+});
