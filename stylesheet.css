@@ -1,0 +1,19 @@
+/* Add your custom extension styling here */
+
+.password-entry {
+    width: 200px;
+    height: 14px;
+    padding: 0;
+    spacing: 0;
+   
+}
+.password-entry .copy-button {
+    icon-size: 16px;
+    color:black;     
+}
+ 
+.copy-button {
+    
+} 
+
+About

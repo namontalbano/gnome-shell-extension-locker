@@ -1,0 +1,8 @@
+{
+  "name": "Locker",
+  "description": "A strong random password generator with options, to save to clipboard, or store to keyring.",
+  "uuid": "locker@namontalbano.email.neit.edu",
+  "shell-version": [
+    "3.36"
+  ]
+}
