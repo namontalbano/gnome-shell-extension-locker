@@ -41,7 +41,6 @@ to increase or decrease password length, provide the length in the input box. Th
 
 ### Keychain Storage
 ![Keyring](screenshots/keyring.png)
-![Keyring Properties](screenshots/keyring_store.png )
 
 ## Licensing
 [MIT](LICENSE)
