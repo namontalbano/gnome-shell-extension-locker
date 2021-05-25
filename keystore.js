@@ -1,7 +1,8 @@
 const Secret = imports.gi.Secret;
 const GObject = imports.gi.GObject;
+const Gio = imports.gi.Gio;
 
-const LOCKER_SCHEMA = new Secret.Schema("org.Test.Locker",
+const LOCKER_SCHEMA = new Secret.Schema("org.gnome.locker.extension",
     Secret.SchemaFlags.NONE,
     {
         "application": Secret.SchemaAttributeType.STRING,
@@ -10,6 +11,8 @@ const LOCKER_SCHEMA = new Secret.Schema("org.Test.Locker",
     }
     
 );
+
+Gio._promisify(Secret, 'password_store', 'password_store_finish');
 
 var Keystore = GObject.registerClass({
     Signals: {
@@ -23,12 +26,8 @@ var Keystore = GObject.registerClass({
                 "username": username,
             }
 
-            let label = username + "::" + service;
-            await Secret.password_store(LOCKER_SCHEMA, this._attributes, Secret.COLLECTION_DEFAULT, 
-                                        label, password, null, this._onPasswordStored);
+            let label = service + "::" + username;
+            return await Secret.password_store(LOCKER_SCHEMA, this._attributes, Secret.COLLECTION_DEFAULT, 
+                                        label, password, null, null);
         }  
-
-        _onPasswordStored(source, result) {
-            Secret.password_store_finish(result);
-        }
 });

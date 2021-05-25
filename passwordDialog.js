@@ -66,12 +66,10 @@ var SaveDialog = GObject.registerClass(
 
             saveButton.connect('button-press-event', () => {
                 this._keystore.storePassword(serviceEntry.get_text(), usernameEntry.get_text(), this.password)
-                    .then( () => {
-                        this.close();
-                    });
-                    serviceEntry.set_text("");
-                    usernameEntry.set_text("");     
-                    this.password = null;
+                this.close();
+                serviceEntry.set_text("");
+                usernameEntry.set_text("");     
+                this.password = null;
 	    	});
         }
 });
