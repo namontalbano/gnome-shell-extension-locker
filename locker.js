@@ -5,7 +5,11 @@ const {Gio, GObject, St, Clutter} = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
+const Domain = Gettext.domain(Me.metadata.uuid);
 const Password = Me.imports.passwordDialog;
+
+const _ = Domain.gettext;
+const ngettext = Domain.ngettext;
 
 var Locker = class Locker { 
 	constructor() {
@@ -32,7 +36,7 @@ var Locker = class Locker {
 		this._lockerPanelButton.menu.connect(
 			'open-state-changed', () => {
 				this._inputMenu.passwordEntry.set_text("");
-				this._buttonsMenu.generateButton.set_label('Generate');		
+				this._buttonsMenu.generateButton.set_label_('Generate');		
 		});
 
 		this._switchMenu.connect('toggled', item => {
@@ -100,10 +104,10 @@ var Locker = class Locker {
 var LockerPanelMenuButton = GObject.registerClass(
     class LockerPanelMenuButton extends PanelMenu.Button { 
 		_init() {
-			super._init(0, "LockerPanelButton");
+			super._init(0, 'LockerPanelButton');
 
 			log(`enabling ${Me.metadata.name}`);    
-			this._indicator = new PanelMenu.Button(0, "LockerPanelButton");
+			this._indicator = new PanelMenu.Button(0, 'LockerPanelButton');
 			this._icon = new St.Icon({
 				style_class: 'system-status-icon',
 				gicon: Gio.icon_new_for_string(`${Me.path}/icons/dialog-password-symbolic.svg`)
@@ -149,7 +153,7 @@ var InputMenuItem = GObject.registerClass(
 var SwitchMenuItem = GObject.registerClass(
 	class SwitchMenuItem extends PopupMenu.PopupSwitchMenuItem {
 		_init(){
-			super._init("Special Characters", true);
+			super._init(_('Special Characters'), true);
 			this.can_focus = true;
 			this.hasSpecialCharacters = true;
 		}

@@ -26,8 +26,7 @@ let locker;
 
 function init() {
     log(`initializing ${Me.metadata.name}`);
-
-    // TODO: init translations
+    ExtensionUtils.initTranslations(Me.metadata.uuid);
 }
 
 function enable() {

@@ -7,6 +7,12 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Keyring = Me.imports.keystore;
 
+const Domain = Gettext.domain(Me.metadata.uuid);
+const Password = Me.imports.passwordDialog;
+
+const _ = Domain.gettext;
+const ngettext = Domain.ngettext;
+
 
 var SaveDialog = GObject.registerClass(
     class SaveDialog extends ModalDialog.ModalDialog { 
@@ -24,7 +30,7 @@ var SaveDialog = GObject.registerClass(
             let serviceEntry = new St.Entry({
                 style_class: 'keystore-entry',
                 can_focus: true,
-                hint_text: 'Service'
+                hint_text: _('Service')
             });
             content.add_child(serviceEntry);
 
@@ -32,7 +38,7 @@ var SaveDialog = GObject.registerClass(
             let usernameEntry = new St.Entry({
                 style_class: 'keystore-entry',
                 can_focus: true,
-                hint_text: 'Username'
+                hint_text: _('Username')
             });
             content.add_child(usernameEntry);
         
