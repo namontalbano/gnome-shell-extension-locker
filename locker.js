@@ -5,11 +5,7 @@ const {Gio, GObject, St, Clutter} = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Domain = Gettext.domain(Me.metadata.uuid);
-const Password = Me.imports.passwordDialog;
 
-const _ = Domain.gettext;
-const ngettext = Domain.ngettext;
 
 var Locker = class Locker { 
 	constructor() {
@@ -36,7 +32,7 @@ var Locker = class Locker {
 		this._lockerPanelButton.menu.connect(
 			'open-state-changed', () => {
 				this._inputMenu.passwordEntry.set_text("");
-				this._buttonsMenu.generateButton.set_label_('Generate');		
+				this._buttonsMenu.generateButton.set_label(_('Generate'));		
 		});
 
 		this._switchMenu.connect('toggled', item => {

@@ -6,12 +6,7 @@ const Secret = imports.gi.Secret;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Keyring = Me.imports.keystore;
-
-const Domain = Gettext.domain(Me.metadata.uuid);
 const Password = Me.imports.passwordDialog;
-
-const _ = Domain.gettext;
-const ngettext = Domain.ngettext;
 
 
 var SaveDialog = GObject.registerClass(
