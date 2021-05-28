@@ -27,7 +27,8 @@ var Keystore = GObject.registerClass({
             }
 
             let label = service + "::" + username;
-            return await Secret.password_store(LOCKER_SCHEMA, this._attributes, Secret.COLLECTION_DEFAULT, 
-                                        label, password, null);
+            return await Secret.password_store(LOCKER_SCHEMA, this._attributes,
+                                               Secret.COLLECTION_DEFAULT, 
+                                               label, password, null);
         }  
 });
