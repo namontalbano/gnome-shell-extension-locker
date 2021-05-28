@@ -5,7 +5,7 @@ const {Gio, GObject, St, Clutter} = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-
+const Password = Me.imports.passwordDialog;
 
 var Locker = class Locker { 
 	constructor() {
